@@ -1,0 +1,133 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #1557d1;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.forms{
+
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 40%;
+  text-align: left;
+  margin-left: 30%;
+}
+
+.upload{
+
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+width: 40%;
+text-align: left;
+margin-left: 30%;
+}
+
+#header {
+  padding: 10px;
+  text-align: center;
+  background: #139fe0;
+  color: white;
+  font-size: 18px;
+}
+
+#mostrarDados{
+    width: 100%;
+  background-color: #1557d1;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#dados{
+    border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 40%;
+  text-align: left;
+  margin-left: 30%;
+}
+
+</style>
+<head>
+    <body style = "text-align: center;"></body>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#mostrarDados").click(function(){
+                $.getJSON('dados.json', function(result) { 
+                    $.each(result, function(i, field){
+                        $('<li>  Nome Completo: ' + field.nome + " "+field.sobrenome+"\nIdade:" +field.idade+'</li>').appendTo('#dados')
+                         
+                        
+                }); });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div id='header'>
+            <p>Serie 4 - CES26</p>
+            <p>Samara Ribeiro Silva - COMP22</p>
+        </div>
+        <br>
+        <br>
+    </header>
+    <div class="forms">
+        <p>Insira os dados</p>
+        <form action='forms' method="GET">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome"><br>
+            <label for="sobrename">Sobrenome:</label>
+            <input type="text" id="sobrenome" name="sobrenome"><br>
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade"><br>
+            <input type='submit' value='Enviar' />
+        </form>
+    </div><br>
+    <div id='dados'>
+        <p>Deseja exibir dados gravados?</p>
+        <button id="mostrarDados" type="button">Mostrar Dados</button>
+        <ul id ="dados" ></ul>
+        
+    </div><br>
+    <div class="upload">
+    <p>Upload de arquivos</p>
+    <form action='file/upload' method='post' encType="multipart/form-data">
+        <input  type="file" name="file" value='Escolher Arquivo'/>
+        <input type='submit' value='Enviar' />
+    </form>	
+    </div>
+    
+    
+</body>
+
+</html>
